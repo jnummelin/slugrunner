@@ -9,7 +9,9 @@ mkdir -p $HOME
 if [[ $(ls -A $HOME) ]]; then
 	true
 elif [[ $SLUG_URL ]]; then
-	curl -s "$SLUG_URL" | tar -xzC $HOME
+	curl -m 10 --retry 5 -s -o /tmp/slug.tgz "$SLUG_URL" 
+	tar -xzf /tmp/slug.tgz -C $HOME
+	rm /tmp/slug.tgz
 	unset SLUG_URL
 else
 	cat | tar -xzC $HOME
