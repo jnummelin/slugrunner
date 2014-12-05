@@ -9,7 +9,7 @@ mkdir -p $HOME
 if [[ $(ls -A $HOME) ]]; then
 	true
 elif [[ $SLUG_URL ]]; then
-	curl -m 10 --retry 5 -s -o /tmp/slug.tgz "$SLUG_URL" 
+	curl -m 30 --retry 2 -s -o /tmp/slug.tgz "$SLUG_URL"
 	tar -xzf /tmp/slug.tgz -C $HOME
 	rm /tmp/slug.tgz
 	unset SLUG_URL
